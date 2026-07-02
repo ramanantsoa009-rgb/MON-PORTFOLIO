@@ -52,13 +52,17 @@ function ProjectCard({
         ))}
       </ul>
 
-      <button
+      <motion.button
         onClick={() => onSelect(project)}
-        className="mt-4 flex items-center gap-1.5 text-sm font-medium text-sage-deep transition-colors hover:text-ink"
+        animate={{ scale: [1, 1.04, 1] }}
+        transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
+        whileHover={{ scale: 1.06 }}
+        whileTap={{ scale: 0.97 }}
+        className="mt-4 flex w-fit items-center gap-1.5 rounded-full border border-sage bg-sage-light px-3.5 py-1.5 text-sm font-medium text-sage-deep transition-colors hover:bg-sage hover:text-white"
       >
         Voir le projet
         <Lock size={12} />
-      </button>
+      </motion.button>
     </motion.article>
   );
 }
