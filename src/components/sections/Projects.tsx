@@ -1,13 +1,23 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
-import { ExternalLink, Lock } from "lucide-react";
+import { Lock } from "lucide-react";
 import { projects } from "@/content/projects";
 import { SectionTitle } from "@/components/ui/SectionTitle";
+import { ProjectModal } from "@/components/ui/ProjectModal";
 import { FadeIn } from "@/components/motion/FadeIn";
 import type { Project } from "@/lib/types";
 
-function ProjectCard({ project, index }: { project: Project; index: number }) {
+function ProjectCard({
+  project,
+  index,
+  onSelect,
+}: {
+  project: Project;
+  index: number;
+  onSelect: (project: Project) => void;
+}) {
   return (
     <motion.article
       initial={{ opacity: 0, y: 32 }}
@@ -42,27 +52,20 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
         ))}
       </ul>
 
-      {project.href ? (
-        <a
-          href={project.href}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="mt-4 flex items-center gap-1.5 text-sm font-medium text-sage-deep transition-colors hover:text-ink"
-        >
-          Voir le projet
-          <ExternalLink size={13} />
-        </a>
-      ) : (
-        <span className="mt-4 flex items-center gap-1.5 text-xs text-ink/35">
-          <Lock size={11} />
-          Repo privé
-        </span>
-      )}
+      <button
+        onClick={() => onSelect(project)}
+        className="mt-4 flex items-center gap-1.5 text-sm font-medium text-sage-deep transition-colors hover:text-ink"
+      >
+        Voir le projet
+        <Lock size={12} />
+      </button>
     </motion.article>
   );
 }
 
 export function Projects() {
+  const [selected, setSelected] = useState<Project | null>(null);
+
   return (
     <section id="projets" className="px-6 py-20">
       <div className="mx-auto max-w-5xl">
@@ -74,10 +77,12 @@ export function Projects() {
         </FadeIn>
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {projects.map((project, index) => (
-            <ProjectCard key={project.id} project={project} index={index} />
+            <ProjectCard key={project.id} project={project} index={index} onSelect={setSelected} />
           ))}
         </div>
       </div>
+
+      <ProjectModal project={selected} onClose={() => setSelected(null)} />
     </section>
   );
 }
