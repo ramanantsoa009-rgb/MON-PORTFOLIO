@@ -4,6 +4,8 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Lock } from "lucide-react";
 import { projects } from "@/content/projects";
+import { ui } from "@/content/ui";
+import { useLocale } from "@/context/LanguageContext";
 import { SectionTitle } from "@/components/ui/SectionTitle";
 import { ProjectModal } from "@/components/ui/ProjectModal";
 import { FadeIn } from "@/components/motion/FadeIn";
@@ -13,10 +15,14 @@ function ProjectCard({
   project,
   index,
   onSelect,
+  techAria,
+  viewProjectLabel,
 }: {
   project: Project;
   index: number;
   onSelect: (project: Project) => void;
+  techAria: string;
+  viewProjectLabel: string;
 }) {
   return (
     <motion.article
@@ -41,7 +47,7 @@ function ProjectCard({
       <h3 className="font-bold text-ink">{project.title}</h3>
       <p className="mt-2 flex-1 text-sm leading-relaxed text-ink/70">{project.description}</p>
 
-      <ul className="mt-4 flex flex-wrap gap-2" aria-label="Technologies utilisées">
+      <ul className="mt-4 flex flex-wrap gap-2" aria-label={techAria}>
         {project.tags.map((tag) => (
           <li
             key={tag}
@@ -60,7 +66,7 @@ function ProjectCard({
         whileTap={{ scale: 0.97 }}
         className="mt-4 flex w-fit items-center gap-1.5 rounded-full border border-sage bg-sage-light px-3.5 py-1.5 text-sm font-medium text-sage-deep transition-colors hover:bg-sage hover:text-white"
       >
-        Voir le projet
+        {viewProjectLabel}
         <Lock size={12} />
       </motion.button>
     </motion.article>
@@ -69,19 +75,26 @@ function ProjectCard({
 
 export function Projects() {
   const [selected, setSelected] = useState<Project | null>(null);
+  const { locale } = useLocale();
+  const t = ui[locale];
+  const localizedProjects = projects[locale];
 
   return (
     <section id="projets" className="px-6 py-20">
       <div className="mx-auto max-w-5xl">
         <FadeIn>
-          <SectionTitle
-            title="Projets"
-            subtitle="Quelques réalisations récentes — automatisation, IA appliquée et intégrations sur mesure."
-          />
+          <SectionTitle title={t.projects.title} subtitle={t.projects.subtitle} />
         </FadeIn>
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {projects.map((project, index) => (
-            <ProjectCard key={project.id} project={project} index={index} onSelect={setSelected} />
+          {localizedProjects.map((project, index) => (
+            <ProjectCard
+              key={project.id}
+              project={project}
+              index={index}
+              onSelect={setSelected}
+              techAria={t.projects.techAria}
+              viewProjectLabel={t.projects.viewProject}
+            />
           ))}
         </div>
       </div>

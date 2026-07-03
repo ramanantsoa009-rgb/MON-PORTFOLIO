@@ -4,6 +4,8 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { Download } from "lucide-react";
 import { site } from "@/content/site";
+import { ui } from "@/content/ui";
+import { useLocale } from "@/context/LanguageContext";
 import { Button } from "@/components/ui/Button";
 
 const EASE = [0.22, 1, 0.36, 1] as [number, number, number, number];
@@ -52,12 +54,12 @@ function HeroBackground() {
   );
 }
 
-function ProfilePhoto() {
-  if (site.photo) {
+function ProfilePhoto({ photo, name, photoAlt }: { photo?: string; name: string; photoAlt: string }) {
+  if (photo) {
     return (
       <Image
-        src={site.photo}
-        alt={`Photo de ${site.name}`}
+        src={photo}
+        alt={photoAlt}
         width={320}
         height={320}
         priority
@@ -71,16 +73,20 @@ function ProfilePhoto() {
       aria-hidden="true"
       className="flex h-64 w-64 items-center justify-center rounded-full bg-sage text-5xl font-bold text-white shadow-xl ring-4 ring-sage/30 md:h-80 md:w-80"
     >
-      {getInitials(site.name)}
+      {getInitials(name)}
     </div>
   );
 }
 
 export function Hero() {
+  const { locale } = useLocale();
+  const s = site[locale];
+  const t = ui[locale];
+
   return (
     <section
       id="accueil"
-      aria-label="Introduction"
+      aria-label={t.hero.intro}
       className="relative overflow-hidden bg-sage-light px-6 py-24 md:py-32"
     >
       <HeroBackground />
@@ -89,28 +95,28 @@ export function Hero() {
         {/* Texte */}
         <div className="flex-1 text-center md:text-left">
           <motion.p {...entry(0)} className="mb-2 text-sm font-medium uppercase tracking-widest text-sage-deep">
-            {site.role}
+            {s.role}
           </motion.p>
 
           <motion.h1 {...entry(0.12)} className="text-4xl font-bold text-ink md:text-6xl">
-            {site.name}
+            {s.name}
           </motion.h1>
 
           <motion.p {...entry(0.24)} className="mt-6 max-w-xl text-lg leading-relaxed text-ink/80">
-            {site.tagline}
+            {s.tagline}
           </motion.p>
 
           <motion.p {...entry(0.32)} className="mt-3 max-w-xl text-sm italic text-sage-deep">
-            &ldquo;{site.quote}&rdquo;
+            &ldquo;{s.quote}&rdquo;
           </motion.p>
 
           {/* Stats */}
           <motion.ul
             {...entry(0.4)}
             className="mt-8 flex flex-wrap justify-center gap-6 md:justify-start"
-            aria-label="Chiffres clés"
+            aria-label={t.hero.keyFigures}
           >
-            {site.stats.map((stat) => (
+            {s.stats.map((stat) => (
               <li key={stat.label} className="text-center">
                 <span className="block text-2xl font-bold text-sage-deep">{stat.value}</span>
                 <span className="text-xs text-ink/60">{stat.label}</span>
@@ -123,17 +129,17 @@ export function Hero() {
             {...entry(0.5)}
             className="mt-8 flex flex-wrap justify-center gap-4 md:justify-start"
           >
-            <Button href="#projets">Voir mes projets</Button>
-            <Button href="#contact" variant="outline">Me contacter</Button>
-            {site.cvUrl && (
+            <Button href="#projets">{t.hero.ctaProjects}</Button>
+            <Button href="#contact" variant="outline">{t.hero.ctaContact}</Button>
+            {s.cvUrl && (
               <a
-                href={site.cvUrl}
+                href={s.cvUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 rounded-lg border border-sage-deep px-5 py-2.5 text-sm font-medium text-sage-deep transition-colors hover:bg-sage-deep hover:text-white"
               >
                 <Download size={15} />
-                Télécharger mon CV
+                {t.hero.downloadCv}
               </a>
             )}
           </motion.div>
@@ -146,7 +152,7 @@ export function Hero() {
           transition={{ duration: 0.8, delay: 0.3, ease: EASE }}
           className="flex shrink-0 justify-center"
         >
-          <ProfilePhoto />
+          <ProfilePhoto photo={s.photo} name={s.name} photoAlt={t.hero.photoAlt(s.name)} />
         </motion.div>
       </div>
     </section>

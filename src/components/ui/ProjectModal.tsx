@@ -4,6 +4,8 @@ import { useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Lock, Mail, X } from "lucide-react";
 import { site } from "@/content/site";
+import { ui } from "@/content/ui";
+import { useLocale } from "@/context/LanguageContext";
 import type { Project } from "@/lib/types";
 
 interface ProjectModalProps {
@@ -12,6 +14,10 @@ interface ProjectModalProps {
 }
 
 export function ProjectModal({ project, onClose }: ProjectModalProps) {
+  const { locale } = useLocale();
+  const s = site[locale];
+  const t = ui[locale];
+
   useEffect(() => {
     if (!project) return;
 
@@ -29,11 +35,9 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
   }, [project, onClose]);
 
   const mailtoHref = project
-    ? `mailto:${site.email}?subject=${encodeURIComponent(
-        `Accès au projet — ${project.title}`
-      )}&body=${encodeURIComponent(
-        `Bonjour Adrien,\n\nJ'aimerais en savoir plus sur le projet "${project.title}" et, si possible, obtenir un accès à son code source.\n\nMerci d'avance.`
-      )}`
+    ? `mailto:${s.email}?subject=${encodeURIComponent(
+        t.projectModal.mailSubject(project.title)
+      )}&body=${encodeURIComponent(t.projectModal.mailBody(project.title))}`
     : "";
 
   return (
@@ -64,7 +68,7 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
           >
             <button
               onClick={onClose}
-              aria-label="Fermer"
+              aria-label={t.projectModal.close}
               className="absolute right-4 top-4 rounded-full p-1 text-ink/40 transition-colors hover:bg-sage-light hover:text-ink"
             >
               <X size={18} />
@@ -75,12 +79,12 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
             </div>
 
             <h3 id="project-modal-title" className="mt-4 font-bold text-ink">
-              Code source privé
+              {t.projectModal.privateTitle}
             </h3>
             <p className="mt-2 text-sm leading-relaxed text-ink/70">
-              Le dépôt de <span className="font-medium text-ink">{project?.title}</span> reste
-              privé, pour des raisons de confidentialité liées au projet ou au client. Contactez-moi
-              directement et je vous propose un accès ou une démonstration.
+              {t.projectModal.privateBodyBefore}
+              <span className="font-medium text-ink">{project?.title}</span>
+              {t.projectModal.privateBodyAfter}
             </p>
 
             <a
@@ -88,7 +92,7 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
               className="mt-5 inline-flex items-center gap-2 rounded-md bg-sage px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-sage-deep"
             >
               <Mail size={15} />
-              M&apos;envoyer un email
+              {t.projectModal.emailCta}
             </a>
           </motion.div>
         </motion.div>

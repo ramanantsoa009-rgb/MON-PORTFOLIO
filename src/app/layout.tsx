@@ -5,7 +5,9 @@ import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { FloatingShapes } from '@/components/motion/FloatingShapes';
 import { SmoothScroll } from '@/components/motion/SmoothScroll';
+import { LanguageProvider } from '@/context/LanguageContext';
 import { site } from '@/content/site';
+import { DEFAULT_LOCALE } from '@/lib/i18n';
 import './globals.css';
 
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
@@ -18,25 +20,27 @@ const carlito = Carlito({
   display: 'swap',
 });
 
+const siteMeta = site[DEFAULT_LOCALE];
+
 export const metadata: Metadata = {
-  title: `${site.name} — ${site.role}`,
-  description: site.tagline,
+  title: `${siteMeta.name} — ${siteMeta.role}`,
+  description: siteMeta.tagline,
   openGraph: {
-    title: `${site.name} — ${site.role}`,
-    description: site.tagline,
+    title: `${siteMeta.name} — ${siteMeta.role}`,
+    description: siteMeta.tagline,
     type: 'website',
     locale: 'fr_FR',
   },
   twitter: {
     card: 'summary_large_image',
-    title: `${site.name} — ${site.role}`,
-    description: site.tagline,
+    title: `${siteMeta.name} — ${siteMeta.role}`,
+    description: siteMeta.tagline,
   },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="fr" className={carlito.variable}>
+    <html lang={DEFAULT_LOCALE} className={carlito.variable}>
       <body className="flex min-h-screen flex-col bg-bg text-ink antialiased">
         {GA_ID && (
           <>
@@ -49,11 +53,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             `}</Script>
           </>
         )}
-        <SmoothScroll />
-        <FloatingShapes />
-        <Header />
-        <main className="flex-1">{children}</main>
-        <Footer />
+        <LanguageProvider>
+          <SmoothScroll />
+          <FloatingShapes />
+          <Header />
+          <main className="flex-1">{children}</main>
+          <Footer />
+        </LanguageProvider>
       </body>
     </html>
   );

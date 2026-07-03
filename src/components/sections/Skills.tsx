@@ -2,6 +2,8 @@
 
 import { motion } from "framer-motion";
 import { skills } from "@/content/skills";
+import { ui } from "@/content/ui";
+import { useLocale } from "@/context/LanguageContext";
 import { SectionTitle } from "@/components/ui/SectionTitle";
 import { FadeIn } from "@/components/motion/FadeIn";
 import { SKILL_ICONS } from "@/lib/skillIcons";
@@ -66,14 +68,18 @@ function SkillCard({ group, index }: { group: SkillGroup; index: number }) {
 }
 
 export function Skills() {
+  const { locale } = useLocale();
+  const t = ui[locale];
+  const localizedSkills = skills[locale];
+
   return (
     <section id="competences" className="bg-sage-light px-6 py-20">
       <div className="mx-auto max-w-5xl">
         <FadeIn>
-          <SectionTitle title="Compétences & Stack" />
+          <SectionTitle title={t.skills.title} />
         </FadeIn>
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {skills.map((group, index) => (
+          {localizedSkills.map((group, index) => (
             <SkillCard key={group.category} group={group} index={index} />
           ))}
         </div>

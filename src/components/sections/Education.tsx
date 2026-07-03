@@ -3,18 +3,22 @@
 import { motion } from "framer-motion";
 import { GraduationCap, Award, ExternalLink } from "lucide-react";
 import { diplomas, certifications } from "@/content/education";
+import { ui } from "@/content/ui";
+import { useLocale } from "@/context/LanguageContext";
 import { SectionTitle } from "@/components/ui/SectionTitle";
 import { FadeIn } from "@/components/motion/FadeIn";
 
 export function Education() {
+  const { locale } = useLocale();
+  const t = ui[locale];
+  const localizedDiplomas = diplomas[locale];
+  const localizedCertifications = certifications[locale];
+
   return (
     <section id="formation" className="px-6 py-20">
       <div className="mx-auto max-w-5xl">
         <FadeIn>
-          <SectionTitle
-            title="Formation"
-            subtitle="Diplômes et certifications techniques."
-          />
+          <SectionTitle title={t.education.title} subtitle={t.education.subtitle} />
         </FadeIn>
 
         <div className="grid gap-10 md:grid-cols-2">
@@ -22,10 +26,10 @@ export function Education() {
           <div>
             <div className="mb-6 flex items-center gap-2 text-sm font-semibold uppercase tracking-widest text-sage-deep">
               <GraduationCap size={16} />
-              Diplômes
+              {t.education.diplomas}
             </div>
             <ul className="space-y-4">
-              {diplomas.map((d, i) => (
+              {localizedDiplomas.map((d, i) => (
                 <motion.li
                   key={d.degree}
                   initial={{ opacity: 0, y: 20 }}
@@ -52,10 +56,10 @@ export function Education() {
           <div>
             <div className="mb-6 flex items-center gap-2 text-sm font-semibold uppercase tracking-widest text-sage-deep">
               <Award size={16} />
-              Certifications techniques
+              {t.education.certifications}
             </div>
             <ul className="space-y-3">
-              {certifications.map((c, i) => (
+              {localizedCertifications.map((c, i) => (
                 <motion.li
                   key={c.label}
                   initial={{ opacity: 0, x: -16 }}
@@ -73,7 +77,7 @@ export function Education() {
                       href={c.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      aria-label={`Voir l'attestation ${c.label}`}
+                      aria-label={t.education.viewCertificate(c.label)}
                       className="shrink-0 text-ink/30 transition-colors hover:text-sage-deep"
                     >
                       <ExternalLink size={13} />

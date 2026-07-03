@@ -2,11 +2,21 @@
 
 import { motion } from "framer-motion";
 import { experiences } from "@/content/experiences";
+import { ui } from "@/content/ui";
+import { useLocale } from "@/context/LanguageContext";
 import { SectionTitle } from "@/components/ui/SectionTitle";
 import { FadeIn } from "@/components/motion/FadeIn";
 import type { Experience } from "@/lib/types";
 
-function ExperienceCard({ exp, index }: { exp: Experience; index: number }) {
+function ExperienceCard({
+  exp,
+  index,
+  transferableSkillsLabel,
+}: {
+  exp: Experience;
+  index: number;
+  transferableSkillsLabel: string;
+}) {
   return (
     <motion.article
       initial={{ opacity: 0, y: 28 }}
@@ -49,7 +59,7 @@ function ExperienceCard({ exp, index }: { exp: Experience; index: number }) {
         </ul>
 
         <p className="mt-4 text-xs italic text-ink/50">
-          <span className="font-semibold not-italic text-sage-deep">Compétences transférables :</span>{" "}
+          <span className="font-semibold not-italic text-sage-deep">{transferableSkillsLabel}</span>{" "}
           {exp.transferableSkills}
         </p>
       </div>
@@ -58,18 +68,24 @@ function ExperienceCard({ exp, index }: { exp: Experience; index: number }) {
 }
 
 export function Experiences() {
+  const { locale } = useLocale();
+  const t = ui[locale];
+  const localizedExperiences = experiences[locale];
+
   return (
     <section id="experiences" className="px-6 py-20">
       <div className="mx-auto max-w-5xl">
         <FadeIn>
-          <SectionTitle
-            title="Expériences"
-            subtitle="Mon parcours professionnel, de l'automatisation des processus à l'ingénierie IA."
-          />
+          <SectionTitle title={t.experiences.title} subtitle={t.experiences.subtitle} />
         </FadeIn>
         <div className="flex flex-col gap-6">
-          {experiences.map((exp, index) => (
-            <ExperienceCard key={exp.id} exp={exp} index={index} />
+          {localizedExperiences.map((exp, index) => (
+            <ExperienceCard
+              key={exp.id}
+              exp={exp}
+              index={index}
+              transferableSkillsLabel={t.experiences.transferableSkills}
+            />
           ))}
         </div>
       </div>

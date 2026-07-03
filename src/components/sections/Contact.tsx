@@ -1,52 +1,56 @@
+"use client";
+
 import { Mail, Phone } from "lucide-react";
 import { FaGithub, FaLinkedinIn, FaWhatsapp } from "react-icons/fa";
 import { site } from "@/content/site";
+import { ui } from "@/content/ui";
+import { useLocale } from "@/context/LanguageContext";
 import { SectionTitle } from "@/components/ui/SectionTitle";
 import { FadeIn } from "@/components/motion/FadeIn";
 
 export function Contact() {
+  const { locale } = useLocale();
+  const s = site[locale];
+  const t = ui[locale];
+
   return (
     <section id="contact" className="bg-sage-light px-6 py-20">
       <div className="mx-auto max-w-5xl">
         <FadeIn>
-          <SectionTitle title="Contact" />
+          <SectionTitle title={t.contact.title} />
         </FadeIn>
 
         <FadeIn delay={0.1}>
           <div className="mb-10 max-w-xl space-y-2">
-            <p className="text-lg font-medium text-ink">
-              Un projet, une question, ou juste envie d&rsquo;échanger ?
-            </p>
-            <p className="leading-relaxed text-ink/70">
-              Les coordonnées sont juste en dessous.
-            </p>
+            <p className="text-lg font-medium text-ink">{t.contact.lead}</p>
+            <p className="leading-relaxed text-ink/70">{t.contact.sub}</p>
           </div>
         </FadeIn>
 
         <FadeIn delay={0.2}>
-          <nav aria-label="Moyens de contact">
+          <nav aria-label={t.contact.ariaMeans}>
             <ul className="flex flex-wrap gap-4">
               <li>
                 <a
-                  href={`mailto:${site.email}`}
+                  href={`mailto:${s.email}`}
                   className="flex items-center gap-2.5 rounded-lg border border-sage bg-white px-5 py-3 text-sm font-medium text-ink transition-colors hover:border-sage-deep hover:text-sage-deep"
                 >
                   <Mail size={16} className="shrink-0 text-sage-deep" />
-                  {site.email}
+                  {s.email}
                 </a>
               </li>
               <li>
                 <a
-                  href={`tel:${site.phone.replace(/\s/g, '')}`}
+                  href={`tel:${s.phone.replace(/\s/g, '')}`}
                   className="flex items-center gap-2.5 rounded-lg border border-sage bg-white px-5 py-3 text-sm font-medium text-ink transition-colors hover:border-sage-deep hover:text-sage-deep"
                 >
                   <Phone size={16} className="shrink-0 text-sage-deep" />
-                  {site.phone}
+                  {s.phone}
                 </a>
               </li>
               <li>
                 <a
-                  href={site.github}
+                  href={s.github}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-2.5 rounded-lg border border-sage bg-white px-5 py-3 text-sm font-medium text-ink transition-colors hover:border-sage-deep hover:text-sage-deep"
@@ -57,7 +61,7 @@ export function Contact() {
               </li>
               <li>
                 <a
-                  href={site.whatsapp}
+                  href={s.whatsapp}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-2.5 rounded-lg border border-sage bg-white px-5 py-3 text-sm font-medium text-ink transition-colors hover:border-sage-deep hover:text-sage-deep"
@@ -68,7 +72,7 @@ export function Contact() {
               </li>
               <li>
                 <a
-                  href={site.linkedin}
+                  href={s.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-2.5 rounded-lg border border-sage bg-white px-5 py-3 text-sm font-medium text-ink transition-colors hover:border-sage-deep hover:text-sage-deep"
