@@ -42,7 +42,7 @@ function LanguageToggle({ className }: { className?: string }) {
       type="button"
       onClick={toggleLocale}
       aria-label={t.header.toggleLanguage}
-      className={`flex items-center gap-1 rounded-md border border-sage-light px-2.5 py-1 text-xs font-semibold transition-colors hover:border-sage ${className ?? ""}`}
+      className={`flex items-center gap-1 rounded-xs border border-sage-light px-2.5 py-1 text-xs font-semibold transition-colors hover:border-sage ${className ?? ""}`}
     >
       <span className={locale === "fr" ? "text-sage-deep" : "text-ink/40"}>FR</span>
       <span className="text-ink/30">/</span>
@@ -70,7 +70,7 @@ export function Header() {
         </Link>
 
         {/* Desktop nav */}
-        <div className="hidden items-center gap-6 md:flex">
+        <div className="hidden items-center gap-6 lg:flex">
           <nav aria-label={t.header.mainNav}>
             <ul className="flex gap-6">
               {s.nav.map((link) => (
@@ -97,12 +97,12 @@ export function Header() {
         </div>
 
         {/* Burger (mobile) */}
-        <div className="flex items-center gap-3 md:hidden">
+        <div className="flex items-center gap-3 lg:hidden">
           <LanguageToggle />
           <button
             aria-label={menuOpen ? t.header.closeMenu : t.header.openMenu}
             onClick={() => setMenuOpen((o) => !o)}
-            className="flex items-center justify-center rounded-md p-2 text-ink transition-colors hover:text-sage-deep"
+            className="flex items-center justify-center rounded-xs p-2 text-ink transition-colors hover:text-sage-deep"
           >
             {menuOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
@@ -117,7 +117,7 @@ export function Header() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-            className="overflow-hidden border-t border-sage-light bg-bg md:hidden"
+            className="overflow-hidden border-t border-sage-light bg-bg lg:hidden"
             aria-label={t.header.mobileNav}
           >
             <ul className="flex flex-col gap-1 px-6 py-4">
@@ -126,7 +126,7 @@ export function Header() {
                   <a
                     href={link.href}
                     onClick={() => setMenuOpen(false)}
-                    className={`block rounded-md px-3 py-2 text-sm transition-colors hover:bg-sage-light hover:text-sage-deep ${
+                    className={`block rounded-xs px-3 py-2 text-sm transition-colors hover:bg-sage-light hover:text-sage-deep ${
                       active === link.href
                         ? "bg-sage-light font-semibold text-sage-deep"
                         : "text-ink/80"

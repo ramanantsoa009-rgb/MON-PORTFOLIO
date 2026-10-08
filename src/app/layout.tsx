@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
-import { Carlito } from 'next/font/google';
+import { Carlito, JetBrains_Mono } from 'next/font/google';
 import Script from 'next/script';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
-import { FloatingShapes } from '@/components/motion/FloatingShapes';
+import { NeuralBackground } from '@/components/motion/NeuralBackground';
 import { SmoothScroll } from '@/components/motion/SmoothScroll';
 import { LanguageProvider } from '@/context/LanguageContext';
 import { site } from '@/content/site';
@@ -20,27 +20,35 @@ const carlito = Carlito({
   display: 'swap',
 });
 
+// Police monospace : éléments « Git » de la section Expériences (hash, tags, diff)
+const jetbrainsMono = JetBrains_Mono({
+  weight: ['400', '500'],
+  subsets: ['latin'],
+  variable: '--font-jetbrains',
+  display: 'swap',
+});
+
 const siteMeta = site[DEFAULT_LOCALE];
 
 export const metadata: Metadata = {
-  title: `${siteMeta.name} — ${siteMeta.role}`,
+  title: `${siteMeta.name} | ${siteMeta.role}`,
   description: siteMeta.tagline,
   openGraph: {
-    title: `${siteMeta.name} — ${siteMeta.role}`,
+    title: `${siteMeta.name} | ${siteMeta.role}`,
     description: siteMeta.tagline,
     type: 'website',
     locale: 'fr_FR',
   },
   twitter: {
     card: 'summary_large_image',
-    title: `${siteMeta.name} — ${siteMeta.role}`,
+    title: `${siteMeta.name} | ${siteMeta.role}`,
     description: siteMeta.tagline,
   },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang={DEFAULT_LOCALE} className={carlito.variable}>
+    <html lang={DEFAULT_LOCALE} className={`${carlito.variable} ${jetbrainsMono.variable}`}>
       <body className="flex min-h-screen flex-col bg-bg text-ink antialiased">
         {GA_ID && (
           <>
@@ -55,7 +63,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         )}
         <LanguageProvider>
           <SmoothScroll />
-          <FloatingShapes />
+          <NeuralBackground />
           <Header />
           <main className="flex-1">{children}</main>
           <Footer />

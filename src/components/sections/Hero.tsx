@@ -7,6 +7,7 @@ import { site } from "@/content/site";
 import { ui } from "@/content/ui";
 import { useLocale } from "@/context/LanguageContext";
 import { Button } from "@/components/ui/Button";
+import { NeuronOrbit } from "@/components/motion/NeuronOrbit";
 
 const EASE = [0.22, 1, 0.36, 1] as [number, number, number, number];
 
@@ -30,16 +31,6 @@ function getInitials(name: string): string {
 function HeroBackground() {
   return (
     <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
-      <div
-        className="absolute inset-0 opacity-[0.06]"
-        style={{
-          backgroundImage: `
-            linear-gradient(var(--color-sage-deep) 1px, transparent 1px),
-            linear-gradient(90deg, var(--color-sage-deep) 1px, transparent 1px)
-          `,
-          backgroundSize: "48px 48px",
-        }}
-      />
       <motion.div
         className="absolute -right-40 -top-40 h-[600px] w-[600px] rounded-full bg-sage opacity-20 blur-[120px]"
         animate={{ scale: [1, 1.08, 1], opacity: [0.2, 0.28, 0.2] }}
@@ -87,7 +78,7 @@ export function Hero() {
     <section
       id="accueil"
       aria-label={t.hero.intro}
-      className="relative overflow-hidden bg-sage-light px-6 py-24 md:py-32"
+      className="relative overflow-hidden bg-sage-light/60 px-6 py-24 md:py-32"
     >
       <HeroBackground />
 
@@ -136,7 +127,7 @@ export function Hero() {
                 href={s.cvUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 rounded-lg border border-sage-deep px-5 py-2.5 text-sm font-medium text-sage-deep transition-colors hover:bg-sage-deep hover:text-white"
+                className="flex items-center gap-2 rounded-xs border border-sage-deep px-5 py-2.5 text-sm font-medium text-sage-deep transition-colors hover:bg-sage-deep hover:text-white"
               >
                 <Download size={15} />
                 {t.hero.downloadCv}
@@ -152,7 +143,11 @@ export function Hero() {
           transition={{ duration: 0.8, delay: 0.3, ease: EASE }}
           className="flex shrink-0 justify-center"
         >
-          <ProfilePhoto photo={s.photo} name={s.name} photoAlt={t.hero.photoAlt(s.name)} />
+          {/* isolate : les neurones restent derrière la photo sans passer sous le fond du hero */}
+          <div className="relative isolate">
+            <NeuronOrbit />
+            <ProfilePhoto photo={s.photo} name={s.name} photoAlt={t.hero.photoAlt(s.name)} />
+          </div>
         </motion.div>
       </div>
     </section>
