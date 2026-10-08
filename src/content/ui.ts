@@ -1,4 +1,5 @@
 import type { Localized } from '@/lib/i18n';
+import type { SkillLevel } from '@/lib/types';
 
 interface UiStrings {
   header: {
@@ -23,21 +24,33 @@ interface UiStrings {
   services: {
     title: string;
     subtitle: string;
-    techAria: string;
+    stepsAria: string;
   };
   projects: {
     title: string;
     subtitle: string;
     techAria: string;
-    viewProject: string;
+    listAria: string;
+    problem: string;
+    solution: string;
+    result: string;
+    viewGithub: string;
   };
   skills: {
     title: string;
+    subtitle: string;
+    tabsAria: string;
+    levels: Record<SkillLevel, string>;
+    hint: string;
+    moreTabs: string;
   };
   experiences: {
     title: string;
     subtitle: string;
     transferableSkills: string;
+    additions: string;
+    stack: string;
+    routine: string;
   };
   education: {
     title: string;
@@ -48,21 +61,13 @@ interface UiStrings {
   };
   about: {
     title: string;
+    languages: string;
   };
   contact: {
     title: string;
     lead: string;
     sub: string;
     ariaMeans: string;
-  };
-  projectModal: {
-    close: string;
-    privateTitle: string;
-    privateBodyBefore: string;
-    privateBodyAfter: string;
-    emailCta: string;
-    mailSubject: (title: string) => string;
-    mailBody: (title: string) => string;
   };
 }
 
@@ -89,22 +94,34 @@ export const ui: Localized<UiStrings> = {
     },
     services: {
       title: 'Expertises',
-      subtitle: 'Les domaines que je maîtrise et dans lesquels j\'interviens au quotidien.',
-      techAria: 'Technologies',
+      subtitle: 'De l\'idée à la production : comment je mène un projet.',
+      stepsAria: 'Les étapes d\'un projet',
     },
     projects: {
       title: 'Projets',
-      subtitle: 'Quelques réalisations récentes — automatisation, IA appliquée et intégrations sur mesure.',
+      subtitle: 'Quelques réalisations récentes : automatisation, IA appliquée et intégrations sur mesure.',
       techAria: 'Technologies utilisées',
-      viewProject: 'Voir le projet',
+      listAria: 'Liste des projets',
+      problem: 'Problème',
+      solution: 'Solution',
+      result: 'Résultat',
+      viewGithub: 'Voir mon GitHub',
     },
     skills: {
       title: 'Compétences & Stack',
+      subtitle: 'Mes outils, classés selon l\'usage que j\'en fais.',
+      tabsAria: 'Catégories de compétences',
+      levels: { production: 'En production', project: 'En projet', learning: 'En veille / formation' },
+      hint: 'Survolez ou touchez une techno pour voir comment je l\'utilise.',
+      moreTabs: 'Voir les catégories suivantes',
     },
     experiences: {
       title: 'Expériences',
       subtitle: "Mon parcours professionnel, de l'automatisation des processus à l'ingénierie IA.",
       transferableSkills: 'Compétences transférables :',
+      additions: 'ajouts',
+      stack: 'Stack',
+      routine: 'Au quotidien',
     },
     education: {
       title: 'Formation',
@@ -115,23 +132,13 @@ export const ui: Localized<UiStrings> = {
     },
     about: {
       title: 'À propos',
+      languages: 'Langues',
     },
     contact: {
       title: 'Contact',
       lead: 'Un projet, une question, ou juste envie d’échanger ?',
       sub: 'Les coordonnées sont juste en dessous.',
       ariaMeans: 'Moyens de contact',
-    },
-    projectModal: {
-      close: 'Fermer',
-      privateTitle: 'Code source privé',
-      privateBodyBefore: 'Le dépôt de ',
-      privateBodyAfter:
-        ' reste privé, pour des raisons de confidentialité liées au projet ou au client. Contactez-moi directement et je vous propose un accès ou une démonstration.',
-      emailCta: 'M’envoyer un email',
-      mailSubject: (title) => `Accès au projet — ${title}`,
-      mailBody: (title) =>
-        `Bonjour Adrien,\n\nJ'aimerais en savoir plus sur le projet "${title}" et, si possible, obtenir un accès à son code source.\n\nMerci d'avance.`,
     },
   },
   en: {
@@ -155,23 +162,35 @@ export const ui: Localized<UiStrings> = {
       keyFigures: 'Key figures',
     },
     services: {
-      title: 'Expertises',
-      subtitle: 'The areas I master and work in day to day.',
-      techAria: 'Technologies',
+      title: 'Expertise',
+      subtitle: 'From idea to production: how I run a project.',
+      stepsAria: 'The stages of a project',
     },
     projects: {
       title: 'Projects',
-      subtitle: 'A few recent projects — automation, applied AI and custom integrations.',
+      subtitle: 'A few recent projects: automation, applied AI and custom integrations.',
       techAria: 'Technologies used',
-      viewProject: 'View project',
+      listAria: 'Project list',
+      problem: 'Problem',
+      solution: 'Solution',
+      result: 'Result',
+      viewGithub: 'View my GitHub',
     },
     skills: {
       title: 'Skills & Stack',
+      subtitle: 'My tools, sorted by how I use them.',
+      tabsAria: 'Skill categories',
+      levels: { production: 'In production', project: 'In projects', learning: 'Learning / exploring' },
+      hint: 'Hover or tap a technology to see how I use it.',
+      moreTabs: 'See more categories',
     },
     experiences: {
       title: 'Experience',
       subtitle: 'My professional path, from process automation to AI engineering.',
       transferableSkills: 'Transferable skills:',
+      additions: 'additions',
+      stack: 'Stack',
+      routine: 'Day to day',
     },
     education: {
       title: 'Education',
@@ -182,23 +201,13 @@ export const ui: Localized<UiStrings> = {
     },
     about: {
       title: 'About',
+      languages: 'Languages',
     },
     contact: {
       title: 'Contact',
       lead: 'A project, a question, or just want to say hi?',
       sub: 'My contact details are right below.',
       ariaMeans: 'Ways to get in touch',
-    },
-    projectModal: {
-      close: 'Close',
-      privateTitle: 'Private source code',
-      privateBodyBefore: 'The ',
-      privateBodyAfter:
-        " repository stays private, for confidentiality reasons related to the project or the client. Contact me directly and I'll set you up with access or a demo.",
-      emailCta: 'Email me',
-      mailSubject: (title) => `Access to project — ${title}`,
-      mailBody: (title) =>
-        `Hi Adrien,\n\nI'd like to know more about the "${title}" project and, if possible, get access to its source code.\n\nThanks in advance.`,
     },
   },
 };

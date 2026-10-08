@@ -53,7 +53,7 @@ export function Footer() {
           </nav>
         </div>
 
-        <p className="mt-8 text-xs text-ink/30">© {new Date().getFullYear()} {s.name} — {t.footer.rightsReserved}.</p>
+        <p className="mt-8 text-xs text-ink/30">© {new Date().getFullYear()} {s.name} · {t.footer.rightsReserved}.</p>
       </div>
     </footer>
   );
