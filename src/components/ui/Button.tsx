@@ -7,7 +7,7 @@ interface ButtonProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
 
 export function Button({ href, variant = 'primary', children, className, ...props }: ButtonProps) {
   const base =
-    'inline-block rounded-md px-6 py-3 text-sm font-medium transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2';
+    'inline-block rounded-xs px-6 py-3 text-sm font-medium transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2';
   const variants = {
     primary: 'bg-sage text-white hover:bg-sage-deep focus-visible:outline-sage',
     outline:

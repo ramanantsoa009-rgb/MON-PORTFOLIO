@@ -34,4 +34,5 @@ section[id]:target::before {
 
   /* Police — la variable CSS est injectée par next/font dans le <html> */
   --font-sans: var(--font-carlito), Carlito, "Segoe UI", system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, "SF Mono", Menlo, monospace;
 }

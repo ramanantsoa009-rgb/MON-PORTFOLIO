@@ -23,5 +23,5 @@ export function proxy(request: NextRequest) {
 // Exclut les assets statiques/images/robots/sitemap : évite d'invoquer
 // la fonction serverless sur ces requêtes (coût compute Vercel).
 export const config = {
-  matcher: ['/((?!_next/static|_next/image|favicon.ico|robots.txt|sitemap.xml).*)'],
+  matcher: ['/((?!_next/static|_next/image|favicon.ico|robots.txt|sitemap.xml|.*\\.(?:png|jpe?g|gif|webp|avif|svg|ico|pdf)$).*)'],
 };

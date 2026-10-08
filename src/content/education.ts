@@ -8,14 +8,14 @@ export const diplomas: Localized<Diploma[]> = {
       school: 'Athénée Saint Joseph Antsirabe',
       location: 'Madagascar',
       year: '2017',
-      description: 'BACC + 5 en ingénierie logiciel',
+      description: 'Bac + 5 en ingénierie logicielle',
     },
     {
-      degree: "Licence professionnelle en développement d'application informatique",
-      school: 'Athénée Saint Joseph Antsirabe (BACC + 3)',
+      degree: "Licence professionnelle en développement d'applications informatiques",
+      school: 'Athénée Saint Joseph Antsirabe (Bac + 3)',
       location: 'Madagascar',
       year: '2014',
-      description: 'BACC + 3 en informatique appliquée',
+      description: 'Bac + 3 en informatique appliquée',
     },
   ],
   en: [
@@ -38,11 +38,11 @@ export const diplomas: Localized<Diploma[]> = {
 
 export const certifications: Localized<Certification[]> = {
   fr: [
-    { label: 'LLAMA & Mistral AI',        href: '#' },
-    { label: 'Master LangChain V1 & Ollama', href: '#' },
+    { label: 'Llama & Mistral AI' },
+    { label: 'Master LangChain V1 & Ollama' },
   ],
   en: [
-    { label: 'LLAMA & Mistral AI',        href: '#' },
-    { label: 'Master LangChain V1 & Ollama', href: '#' },
+    { label: 'Llama & Mistral AI' },
+    { label: 'Master LangChain V1 & Ollama' },
   ],
 };

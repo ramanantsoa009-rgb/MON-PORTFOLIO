@@ -14,7 +14,7 @@ export function Contact() {
   const t = ui[locale];
 
   return (
-    <section id="contact" className="bg-sage-light px-6 py-20">
+    <section id="contact" className="bg-sage-light/60 px-6 py-20">
       <div className="mx-auto max-w-5xl">
         <FadeIn>
           <SectionTitle title={t.contact.title} />
@@ -33,7 +33,7 @@ export function Contact() {
               <li>
                 <a
                   href={`mailto:${s.email}`}
-                  className="flex items-center gap-2.5 rounded-lg border border-sage bg-white px-5 py-3 text-sm font-medium text-ink transition-colors hover:border-sage-deep hover:text-sage-deep"
+                  className="flex items-center gap-2.5 rounded-xs border border-sage bg-white px-5 py-3 text-sm font-medium text-ink transition-colors hover:border-sage-deep hover:text-sage-deep"
                 >
                   <Mail size={16} className="shrink-0 text-sage-deep" />
                   {s.email}
@@ -42,7 +42,7 @@ export function Contact() {
               <li>
                 <a
                   href={`tel:${s.phone.replace(/\s/g, '')}`}
-                  className="flex items-center gap-2.5 rounded-lg border border-sage bg-white px-5 py-3 text-sm font-medium text-ink transition-colors hover:border-sage-deep hover:text-sage-deep"
+                  className="flex items-center gap-2.5 rounded-xs border border-sage bg-white px-5 py-3 text-sm font-medium text-ink transition-colors hover:border-sage-deep hover:text-sage-deep"
                 >
                   <Phone size={16} className="shrink-0 text-sage-deep" />
                   {s.phone}
@@ -53,7 +53,7 @@ export function Contact() {
                   href={s.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2.5 rounded-lg border border-sage bg-white px-5 py-3 text-sm font-medium text-ink transition-colors hover:border-sage-deep hover:text-sage-deep"
+                  className="flex items-center gap-2.5 rounded-xs border border-sage bg-white px-5 py-3 text-sm font-medium text-ink transition-colors hover:border-sage-deep hover:text-sage-deep"
                 >
                   <FaGithub size={16} className="shrink-0 text-sage-deep" />
                   GitHub
@@ -64,7 +64,7 @@ export function Contact() {
                   href={s.whatsapp}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2.5 rounded-lg border border-sage bg-white px-5 py-3 text-sm font-medium text-ink transition-colors hover:border-sage-deep hover:text-sage-deep"
+                  className="flex items-center gap-2.5 rounded-xs border border-sage bg-white px-5 py-3 text-sm font-medium text-ink transition-colors hover:border-sage-deep hover:text-sage-deep"
                 >
                   <FaWhatsapp size={16} className="shrink-0 text-sage-deep" />
                   WhatsApp
@@ -75,7 +75,7 @@ export function Contact() {
                   href={s.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2.5 rounded-lg border border-sage bg-white px-5 py-3 text-sm font-medium text-ink transition-colors hover:border-sage-deep hover:text-sage-deep"
+                  className="flex items-center gap-2.5 rounded-xs border border-sage bg-white px-5 py-3 text-sm font-medium text-ink transition-colors hover:border-sage-deep hover:text-sage-deep"
                 >
                   <FaLinkedinIn size={16} className="shrink-0 text-sage-deep" />
                   LinkedIn

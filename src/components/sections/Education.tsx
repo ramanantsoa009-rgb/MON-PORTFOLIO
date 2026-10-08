@@ -36,11 +36,11 @@ export function Education() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-40px" }}
                   transition={{ duration: 0.5, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
-                  className="rounded-xl border border-sage-light bg-white p-5 shadow-sm"
+                  className="rounded-sm border border-sage-light bg-white p-5 shadow-sm"
                 >
                   <div className="flex items-start justify-between gap-2">
                     <h3 className="font-bold text-ink">{d.degree}</h3>
-                    <span className="shrink-0 rounded-full bg-sage-light px-2.5 py-0.5 text-xs font-medium text-sage-deep">
+                    <span className="shrink-0 rounded-xs bg-sage-light px-2.5 py-0.5 text-xs font-medium text-sage-deep">
                       {d.year}
                     </span>
                   </div>
@@ -66,7 +66,7 @@ export function Education() {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true, margin: "-40px" }}
                   transition={{ duration: 0.45, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
-                  className="flex items-center justify-between gap-3 rounded-xl border border-sage-light bg-white p-4 shadow-sm"
+                  className="flex items-center justify-between gap-3 rounded-sm border border-sage-light bg-white p-4 shadow-sm"
                 >
                   <div className="flex items-center gap-3">
                     <span className="h-2 w-2 shrink-0 rounded-full bg-sage" />
