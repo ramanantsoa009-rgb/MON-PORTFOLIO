@@ -1,5 +1,5 @@
 import type { Localized } from '@/lib/i18n';
-import type { SkillLevel } from '@/lib/types';
+import type { CertificationGroup, SkillLevel } from '@/lib/types';
 
 interface UiStrings {
   header: {
@@ -57,6 +57,9 @@ interface UiStrings {
     subtitle: string;
     diplomas: string;
     certifications: string;
+    groups: Record<CertificationGroup, string>;
+    view: string;
+    verify: string;
     viewCertificate: (label: string) => string;
   };
   about: {
@@ -125,9 +128,12 @@ export const ui: Localized<UiStrings> = {
     },
     education: {
       title: 'Formation',
-      subtitle: 'Diplômes et certifications techniques.',
+      subtitle: 'Diplômes et certifications.',
       diplomas: 'Diplômes',
-      certifications: 'Certifications techniques',
+      certifications: 'Certifications',
+      groups: { tech: 'Technique', soft: 'Formation & communication' },
+      view: 'Voir',
+      verify: 'Vérifier sur Udemy',
       viewCertificate: (label) => `Voir l'attestation ${label}`,
     },
     about: {
@@ -194,9 +200,12 @@ export const ui: Localized<UiStrings> = {
     },
     education: {
       title: 'Education',
-      subtitle: 'Degrees and technical certifications.',
+      subtitle: 'Degrees and certifications.',
       diplomas: 'Degrees',
-      certifications: 'Technical certifications',
+      certifications: 'Certifications',
+      groups: { tech: 'Technical', soft: 'Training & communication' },
+      view: 'View',
+      verify: 'Verify on Udemy',
       viewCertificate: (label) => `View the ${label} certificate`,
     },
     about: {

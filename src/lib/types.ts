@@ -57,9 +57,21 @@ export interface Diploma {
   description: string;
 }
 
+export type CertificationGroup = 'tech' | 'soft';
+
 export interface Certification {
-  label: string;
-  href?: string;
+  /** Intitulé officiel du cours (gardé dans sa langue d'origine) */
+  title: string;
+  subtitle?: string;
+  issuer: string;
+  instructor: string;
+  date: string;
+  duration: string;
+  /** PDF dans /public/certifications */
+  file: string;
+  /** Page de vérification officielle */
+  verifyUrl: string;
+  group: CertificationGroup;
 }
 
 export interface Project {
