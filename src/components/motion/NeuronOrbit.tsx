@@ -30,7 +30,6 @@ const RING_SETUP = [
   { count: 4, size: [3.5, 5], speed: -0.0034 },
   { count: 5, size: [1.8, 3], speed: 0.0048 },
 ];
-const NEURON_LINK = 0.75; // distance max entre deux neurones reliés (× rayon photo)
 const PHOTO_LINK = 0.42; // distance max entre un neurone et le bord de la photo (× rayon photo)
 
 function readRgb(name: string, fallback: string): string {
@@ -132,24 +131,6 @@ export function NeuronOrbit() {
         ctx!.moveTo(px[i], py[i]);
         ctx!.lineTo(c + (dx / dist) * R, c + (dy / dist) * R);
         ctx!.stroke();
-      }
-
-      // Liaisons entre neurones proches
-      const maxDist = R * NEURON_LINK;
-      for (let i = 0; i < orbiters.length; i++) {
-        for (let j = i + 1; j < orbiters.length; j++) {
-          const dx = px[i] - px[j];
-          const dy = py[i] - py[j];
-          const d = Math.sqrt(dx * dx + dy * dy);
-          if (d > maxDist) continue;
-          const strength = 1 - d / maxDist;
-          ctx!.strokeStyle = `rgba(${linkRgb}, ${strength * 0.3})`;
-          ctx!.lineWidth = 0.6 + strength * 0.6;
-          ctx!.beginPath();
-          ctx!.moveTo(px[i], py[i]);
-          ctx!.lineTo(px[j], py[j]);
-          ctx!.stroke();
-        }
       }
 
       // Signaux entre la photo et les neurones reliés
